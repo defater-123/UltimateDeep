@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DeepSeek+ — Умный чат с нейросетью</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+</head>
+<body>
+    <!-- Экран приветствия / настройки -->
+    <div id="welcome-screen" class="welcome-screen">
+        <div class="welcome-card">
+            <div class="logo-big">
+                <span class="logo-icon">🧠</span>
+                <h1>Deep<span class="accent">Seek</span><span class="plus">+</span></h1>
+            </div>
+            <p class="tagline">Нейросетевой чат нового поколения. Быстрый, умный, бесплатный.</p>
+
+            <div class="features">
+                <div class="feature"><span>⚡</span><b>Мгновенные ответы</b></div>
+                <div class="feature"><span>🌍</span><b>Русский и английский</b></div>
+                <div class="feature"><span>🔒</span><b>Приватность</b></div>
+                <div class="feature"><span>🆓</span><b>Без регистрации</b></div>
+            </div>
+
+            <div class="api-box">
+                <label for="api-key">Ключ DeepSeek API (необязательно)</label>
+                <input type="password" id="api-key" placeholder="sk-... (можно оставить пустым — демо-режим)">
+                <small>Ключ хранится только в вашем браузере (localStorage). Без ключа работает демо-режим с имитацией ответов.</small>
+            </div>
+
+            <button id="start-chat-btn" class="btn-primary">Начать общение →</button>
+        </div>
+    </div>
+
+    <!-- Основной интерфейс чата -->
+    <div id="chat-app" class="chat-app hidden">
+        <header class="topbar">
+            <div class="topbar-left">
+                <button id="menu-btn" class="icon-btn" title="Меню">☰</button>
+                <div class="logo-small">
+                    <span>🧠</span>
+                    <h2>Deep<span class="accent">Seek</span><span class="plus">+</span></h2>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <span id="status-dot" class="status-dot demo"></span>
+                <span id="mode-label" class="mode-label">Демо-режим</span>
+                <button id="clear-btn" class="icon-btn" title="Очистить чат">🗑️</button>
+            </div>
+        </header>
+
+        <aside id="sidebar" class="sidebar hidden">
+            <h3>Настройки</h3>
+            <label class="side-label">API-ключ DeepSeek</label>
+            <input type="password" id="sidebar-api-key" placeholder="sk-...">
+            <label class="side-label">Модель</label>
+            <select id="model-select">
+                <option value="deepseek-chat">deepseek-chat</option>
+                <option value="deepseek-reasoner">deepseek-reasoner</option>
+            </select>
+            <button id="save-settings" class="btn-secondary">Сохранить</button>
+            <hr>
+            <p class="hint">DeepSeek+ — статический сайт для GitHub Pages. Ответы в демо-режиме генерируются локально.</p>
+        </aside>
+
+        <main id="messages" class="messages">
+            <div class="msg bot">
+                <div class="avatar">🧠</div>
+                <div class="bubble">
+                    Привет! Я <b>DeepSeek+</b> — ваш умный ассистент. Задайте любой вопрос: могу написать код, перевести текст, объяснить тему или просто поболтать 🙂
+                </div>
+            </div>
+        </main>
+
+        <footer class="input-bar">
+            <div class="suggestions" id="suggestions">
+                <button class="chip">Напиши функцию на Python</button>
+                <button class="chip">Объясни квантовые компьютеры</button>
+                <button class="chip">Придумай шутку</button>
+                <button class="chip">Составь план путешествия</button>
+            </div>
+            <form id="chat-form" class="input-row">
+                <textarea id="user-input" rows="1" placeholder="Спросите DeepSeek+..." autocomplete="off"></textarea>
+                <button type="submit" id="send-btn" class="send-btn" title="Отправить">➤</button>
+            </form>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
